@@ -4,24 +4,25 @@
 
 This example was created using the following prerequisites:
 - Windows OS
-- Python 3.9
-- Virtual environment
+- Python 3.8.10
 
 It should be possible to run it on other operating systems that support Python.
-The script will most probably work on any Python 3 installation. Here Python 3.9 was used.
+The script will most probably work on any Python 3 installation. Here Python 3.8.10 was used.
 
-A virtual environment is optional. Using a virtual environment makes it easier to create a environment with just those modules you need. This is separate from what modules are installed in the Python version that is installed on the operating system.
+### 3rd party modules
 
-If you don't want to use a virtual environment you can use pip to install the modules that are listed
-in the requirements.txt file.
+You can use pip to install the third party modules that are listed in the requirements.txt file. Pip is the package manager for Python which can install third party modules. Pip is by default part of the Python installation.
+
+Open a terminal window.
+Make sure you are in the directory where the requirements.txt file is.
 Using this command pip will install the modules:
 'pip install --requirement requirements.txt'
+This will take some time to finish.
 
-### Create the virtual environment
+### Spacy language model
 
-This batch file is Windows specific
-- Open a terminal window
-- Run: './create_venv.bat'
+As this solution uses a language model to create embeddings a prebuilt language model is used created by Spacy. This model needs to be installed.
+Run 'python -m spacy download en_core_web_md'
 
 ## Data
 
@@ -34,13 +35,30 @@ The dataset contains just two fields:
 
 Copy the dataset CSV file in the root directory of this project and make sure its name is 'toxicity_en.csv'
 
+## Architecture of the solution
+
+In order to create an application that can take a sentence as input and return whether the sentence is toxic or not we need a number of components.
+
+### Embeddings
+We need to train a neural network on the input data set. Neural networks work using numerical data and the input data set is text based. We first need to find a numerical way to represent the text.
+The solution chosen here is to use language embeddings. Language embeddings create a vector for a piece of text. The semantics of the text is captured in the vector. In this case vectors representing toxic comments will be closer to each other than to non-toxic comments.
+
+### Neural network
+With the input in the form of language embeddings a neural network can be trained. The input contains the label field which indicates whether the sentence at hand is considered toxic or not. With this supervised learning can be applied and a model can be trained which predicts toxicity of sentences.
+
+### Application
+To allow end users to enter their own example comments and get a prediction an application is created which lets the user enter the comment and click a button to run it against the model and get back a prediction. The prediction is shown to the user. A prediction lower than 0.5 is considered non-toxic, anything above 0.5 is considered toxic. 0 and 1 and the extremes, so 0 is absolutely non-toxic and 1 is extremely toxic.
+
+As the model has an accuracy of about 80% it can happen that new input is wrongly predicted. Give it a try to see how well it works.
+
 ## Train neural network
 
 First a neural network needs to be trained in the input data.
-- Run: 'python train_neural_network.py'
+Run: 'python train_neural_network.py'
+When I ran it the model finished with this Test Accuracy: 81.50%
 
 ## Run the toxicity classification GUI
 
 Now that the model has been trained the GUI application can be started to enter a sentence
 and make the model predict whether this sentence is considered toxic or not.
-- Run: 'python predict_toxicity_gui.py'
+Run: 'python predict_toxicity_gui.py'
