@@ -49,13 +49,13 @@ With the input in the form of language embeddings a neural network can be traine
 ### Application
 To allow end users to enter their own example comments and get a prediction an application is created which lets the user enter the comment and click a button to run it against the model and get back a prediction. The prediction is shown to the user. A prediction lower than 0.5 is considered non-toxic, anything above 0.5 is considered toxic. 0 and 1 and the extremes, so 0 is absolutely non-toxic and 1 is extremely toxic.
 
-As the model has an accuracy of about 80% it can happen that new input is wrongly predicted. Give it a try to see how well it works.
+As the model has an accuracy of 80-90%, it can happen that new input is wrongly predicted. Give it a try to see how well it works.
 
 ## Train neural network
 
 First a neural network needs to be trained in the input data.
 Run: 'python train_neural_network.py'
-When I ran it the model finished with this Test Accuracy: 81.50%
+When I ran it the model finished with Accuracies between 80 and 90%.
 
 ## Run the toxicity classification GUI
 
