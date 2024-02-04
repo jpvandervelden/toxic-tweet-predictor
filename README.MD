@@ -40,11 +40,11 @@ In order to create an application that can take a sentence as input and return w
 ### Data preparation
 The Kaggle dataset is a curated dataset which has a high data quality. There are no missing values that need imputing, nor does data need to be standardized. So no work to be done here.
 
-### Sentence Embeddings
+### Sentence embeddings
 We need to train a neural network on the input data set. Neural networks work using numerical data and the input data set is text based. We first need to find a numerical way to represent the text.
 The solution chosen here is to use language embeddings. Language embeddings create a vector for a piece of text. The semantics of the text is captured in the vector. In this case vectors representing toxic comments will be closer to each other than to non-toxic comments.
 
-### Train a Neural network
+### Train a neural network
 With the input in the form of language embeddings a neural network can be trained. The input contains the label field which indicates whether the sentence at hand is considered toxic or not. With this supervised learning can be applied and a model can be trained which predicts toxicity of sentences.
 
 ### Application
@@ -67,7 +67,7 @@ The dataset contains just two fields:
 
 Download the file from Kaggle. Copy the dataset CSV file in the root directory of this project and make sure its name is 'toxicity_en.csv'
 
-### Train neural network
+### Train the neural network
 
 First a neural network needs to be trained in the input data.
 Run: 
@@ -76,10 +76,10 @@ python train_neural_network.py
 ```
 When I ran it the model finished with accuracies between 80 and 90%.
 
-### Run the toxicity classification GUI
+### Run the toxicity classification GUI application
 
 Now that the model has been trained the GUI application can be started to enter a sentence and make the model predict whether this sentence is considered toxic or not.
 Run:
 ```console
-python predict_toxicity_gui.py'
+python predict_toxicity_gui.py
 ```
