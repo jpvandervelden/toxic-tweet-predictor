@@ -1,7 +1,11 @@
 # These imports are necessary to run the script
 import pandas as pd
+import matplotlib.pyplot as plt
+import mplcursors
 import numpy as np
 import spacy
+from mpl_toolkits.mplot3d import Axes3D
+from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score
@@ -62,6 +66,46 @@ df = create_embeddings(input_csv_file, output_csv_file)
 # Encode the 'is_toxic' labels to numerical values (0 for 'Not toxic', 1 for 'Toxic')
 label_encoder = LabelEncoder()
 df['label'] = label_encoder.fit_transform(df['is_toxic'])
+
+#
+# First we will visualize the embeddings in 3D to show how sentences with different labels
+# are distributed in the 3-dimensional space.
+#
+
+# Create a numpy array of the embeddings
+embeddings = np.array(df['embedding'].tolist())
+
+# Reduce the dimensionality of embeddings to 3 dimensions using PCA
+pca = PCA(n_components=3)
+embeddings_3d = pca.fit_transform(embeddings)
+
+# create numpy arrays for the labels and texts
+labels = np.array(df['label'])
+texts = np.array(df['text'])
+
+# Create a custom colormap with black for label 1 (toxic) and yellow for label 0 (not toxic)
+colors = ['green', 'black']
+cmap = plt.cm.colors.ListedColormap(colors)
+
+# Create a 3D scatter plot
+fig = plt.figure(figsize=(8, 6))
+# Create a 3D axis
+ax = fig.add_subplot(111, projection='3d')
+scatter = ax.scatter(embeddings_3d[:, 0], embeddings_3d[:, 1], 
+                     embeddings_3d[:, 2], c=labels, cmap=cmap, s=10)
+# Add the hover functionality to the scatter plot, showing the text of the point
+mplcursors.cursor(scatter, hover=True).connect("add", lambda sel: sel.annotation.set_text(texts[sel.target.index]))
+
+ax.set_title('3D Visualization of Embeddings')
+ax.set_xlabel('Dimension 1')
+ax.set_ylabel('Dimension 2')
+ax.set_zlabel('Dimension 3')
+fig.colorbar(scatter, ax=ax, label='Label')
+plt.show()
+
+#
+# Now we will build a simple neural network model to predict toxicity based on the embeddings
+#
 
 # To be able to validate how well the model can predict toxicity 
 # we need to split the data into training and testing sets

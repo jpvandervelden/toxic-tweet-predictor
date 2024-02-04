@@ -74,6 +74,11 @@ Run:
 ```console
 python train_neural_network.py
 ```
+
+The script has two functions:
+- Show the embeddings in a 3D graph
+- Train a neural network based with the embeddings as input
+
 When I ran it the model finished with accuracies between 80 and 90%.
 
 ### Run the toxicity classification GUI application

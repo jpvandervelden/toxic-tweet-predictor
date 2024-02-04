@@ -1,8 +1,10 @@
+matplotlib
+mpl_toolkits
 numpy
 pandas
+PyQt5
 scikit-learn
 spacy
 tensorflow
-PyQt5
 
 
