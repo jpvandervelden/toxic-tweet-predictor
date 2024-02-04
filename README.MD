@@ -1,9 +1,14 @@
 # Toxicity classification
 
-## Prerequisites
+This is an example application to show how a neural network can be trained using text embeddings. The classification is done on whether sentences taken from Twitter are considered toxic or not toxic.
+
+## Preparation
+
+### Prerequisites
 
 This example was created using the following prerequisites:
 - Python 3.8.10
+- Git
 
 It should be possible to run it on any operating systems that support Python.
 The script will most probably work on any Python 3 installation.
@@ -12,13 +17,13 @@ The script will most probably work on any Python 3 installation.
 
 You can use pip to install the third party modules that are listed in the requirements.txt file. Pip is the package manager for Python which can install third party modules. Pip is by default part of the Python installation.
 
-Open a terminal window.
-Make sure you are in the directory where the requirements.txt file is.
-Using this command pip will install the modules:
+- Open a terminal window.
+- Make sure you are in the directory where the requirements.txt file is.
+- Using this command pip will install the modules:
 ```console
 pip install --requirement requirements.txt
 ```
-This will take some time to finish.
+- This will take some time to finish.
 
 ### Spacy language model
 
@@ -62,7 +67,7 @@ The dataset contains just two fields:
 
 Download the file from Kaggle. Copy the dataset CSV file in the root directory of this project and make sure its name is 'toxicity_en.csv'
 
-## Train neural network
+### Train neural network
 
 First a neural network needs to be trained in the input data.
 Run: 
@@ -71,7 +76,7 @@ python train_neural_network.py
 ```
 When I ran it the model finished with accuracies between 80 and 90%.
 
-## Run the toxicity classification GUI
+### Run the toxicity classification GUI
 
 Now that the model has been trained the GUI application can be started to enter a sentence and make the model predict whether this sentence is considered toxic or not.
 Run:
