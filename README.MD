@@ -15,13 +15,18 @@ You can use pip to install the third party modules that are listed in the requir
 Open a terminal window.
 Make sure you are in the directory where the requirements.txt file is.
 Using this command pip will install the modules:
-'pip install --requirement requirements.txt'
+```console
+pip install --requirement requirements.txt
+```
 This will take some time to finish.
 
 ### Spacy language model
 
 As this solution uses a language model to create embeddings a prebuilt language model is used created by Spacy. This model needs to be installed.
-Run 'python -m spacy download en_core_web_md'
+Run
+```console
+python -m spacy download en_core_web_md
+```
 
 ## Architecture of the solution
 
@@ -60,11 +65,16 @@ Download the file from Kaggle. Copy the dataset CSV file in the root directory o
 ## Train neural network
 
 First a neural network needs to be trained in the input data.
-Run: 'python train_neural_network.py'
+Run: 
+```console
+python train_neural_network.py
+```
 When I ran it the model finished with accuracies between 80 and 90%.
 
 ## Run the toxicity classification GUI
 
 Now that the model has been trained the GUI application can be started to enter a sentence and make the model predict whether this sentence is considered toxic or not.
-Run: 'python predict_toxicity_gui.py'
-
+Run:
+```console
+python predict_toxicity_gui.py'
+```
